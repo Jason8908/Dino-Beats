@@ -23,6 +23,6 @@ A discord music bot. Made by the same person who co-created Zombie Dino. This pr
 ![](https://i.imgur.com/oe19On8.png)
 
 ## Add the bot to your server!
-https://discord.com/developers/applications/764981316382883920/oauth2
+https://discord.com/api/oauth2/authorize?client_id=764981316382883920&permissions=0&scope=bot
 ## Copyright and License
 Copyright (c) 2020 Jason Su. Developed with Node.js and Discord.js. This project is licensed under the terms of the MIT License. Please see the LICENSE file for full reference.
