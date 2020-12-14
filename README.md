@@ -1,3 +1,4 @@
+![](https://img.shields.io/github/commits-since/Jason8908/Dino-Beats/0.1.0) ![](https://img.shields.io/github/repo-size/Jason8908/Dino-Beats) ![](https://img.shields.io/github/v/release/Jason8908/Dino-Beats) ![](https://img.shields.io/github/downloads/Jason8908/Dino-Beats/latest/total) ![](https://img.shields.io/github/license/Jason8908/Dino-Beats) ![](https://img.shields.io/github/languages/top/Jason8908/Dino-Beats)
 # Dino Beats
 A discord music bot. Made by the same person who co-created Zombie Dino. This project is in early development, and as a result, there are many bugs and unfinished features to be added later on. 
 
