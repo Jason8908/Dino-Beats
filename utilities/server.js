@@ -12,7 +12,7 @@ class Server extends JSONTemplate {
 		this.dispatcher = null;
 		this.active = false;
 		this.timeout = null;
-		this.ytdl = require('ytdl-core-discord');
+		this.ytdl = require('ytdl-core');
 		this.prism = require('prism-media');
 	}
 	init(textID = this.text, voiceID = this.voice, connection = this.connection, guild) {
@@ -61,8 +61,7 @@ class Server extends JSONTemplate {
 	            filter: "audioonly",
 	            highWaterMark: 1<<25
 	        });
-	        const pcm = input.pipe(new this.prism.opus.Decoder({ rate: 48000, channels: 2, frameSize: 960 }));
-	        const dispatcher = await this.connection.play(pcm, {type: 'converted'});
+	        const dispatcher = await this.connection.play(input);
 	        dispatcher.setVolume(0.15);
 	        //Updating dispatcher variable.
 	        this.play(dispatcher);

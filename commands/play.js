@@ -116,8 +116,7 @@ module.exports.run = async (client, message, args) => {
                     filter: "audioonly",
                     highWaterMark: 1<<25
                 });
-                const pcm = input.pipe(new prism.opus.Decoder({ rate: 48000, channels: 2, frameSize: 960 }));
-                const dispatcher = await cache.connection.play(pcm, {type: 'converted'});
+                const dispatcher = await cache.connection.play(input);
                 dispatcher.setVolume(0.15);
                 //Updating dispatcher variable.
                 cache.play(dispatcher);
@@ -204,138 +203,6 @@ module.exports.run = async (client, message, args) => {
         return true;
     };
 };
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /*
-    let queue = serverMusicFile[serverID].queue;
-
-    let link = args[0];
-
-    if(!link) return;
-
-    let voiceChannel = message.member.voiceChannel;
-    if(!voiceChannel) {
-        message.channel.send({embed: {
-            color: 0xff0000,
-            description: `<@${userID}> You must be in a voice channel in order to make use of this command.`
-        }});
-        return;
-    };
-
-    let input;
-
-    try {
-        input = await ytdl(link, {
-            filter: "audioonly",
-            highWaterMark: 1<<25
-        });
-    }
-    catch(err) {
-        message.channel.send({embed: {
-            color: 0xff0000,
-            description: `<@${userID}> Please enter a valid youtube video link.`
-        }});
-        return;
-    };
-
-    let connection;
-    let botChannel = message.guild.voiceConnection;
-    try {
-        connection = await voiceChannel.join();
-    }
-    catch(err) {
-        if(!botChannel) {
-            message.channel.send({embed: {
-                color: 0xff0000,
-                description: `**Failed to join user's channel**`
-            }}); 
-        };
-        return;
-    }
-    if(!botChannel) {
-        message.channel.send({embed: {
-            color: 0xffff00,
-            description: `**Successfully joined ${voiceChannel.name}**`
-        }});
-    };
-
-    let songTitle = await ytdl.getInfo(link, async (_err, info) => {
-        return info.title;
-    });
-
-    let secondsLength =+ await ytdl.getInfo(link, async (_err, info) => {
-        return info.length_seconds;
-    });
-
-    let songLength = timeFormat(secondsLength);
-
-    if(queue.length < 1) {
-        const pcm = input.pipe(new prism.opus.Decoder({ rate: 48000, channels: 2, frameSize: 960 }));
-        queue.push(new queueNode(songTitle, username, link, songLength));
-        message.channel.send({embed: {
-            color: 0x00ff00,
-            description: `**Playing ${songTitle}.**`
-        }});
-        serverMusicFile[serverID].queue = queue;
-        fs.writeFileSync(serverMusicPath, JSON.stringify(serverMusicFile, null, 2));
-
-        const DISP = await connection.playConvertedStream(pcm);
-        DISP.setVolume(0.1);
-
-        for(let i = 0; i < dispatchers.length; i++) if(dispatchers[i].guild == serverID) dispatchers[i].dispatch = DISP;
-
-        DISP.on('end', () => {
-            const fs = require('fs');
-            let serverMusicPath = 'serverMusic.json';
-            let serverMusicRead = fs.readFileSync(serverMusicPath, 'utf8');
-            let serverMusicFile = JSON.parse(serverMusicRead); //reading the file again
-
-            let queue = serverMusicFile[serverID].queue;
-            playNext(fs, queue, serverMusicFile, ytdl, connection);
-        });
-        return;
-    };
-
-    queue.push(new queueNode(songTitle, username, link, songLength));
-    serverMusicFile[serverID].queue = queue;
-    fs.writeFileSync(serverMusicPath, JSON.stringify(serverMusicFile, null, 2));
-
-    message.channel.send({embed: {
-        color: 0x00ff00,
-        description: `**Added ${songTitle} to the queue!**`
-    }});
-    */
-
 module.exports.help = {
     name: ["play", "p"],
     description: "Play music!",
