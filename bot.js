@@ -45,6 +45,15 @@ client.on('ready', () => {
 	console.log(`Logged in to [${guilds.cache.size}] guilds!`);
 });
 
+//When bot gets added to a new server.
+client.on('guildCreate', guild => {
+	let server = new JSONTemplate("guilds.json");
+	//Checking for empty files and populating them.
+	if(!server.data[guild.id]) server.data[guild.id] = {voice: null, text: null};
+	//Writing the data into the file.
+	server.write();
+})
+
 client.on('message', message => {
 	//Stop DMs.
     if (message.channel.type == "dm" || message.author.bot) return;
