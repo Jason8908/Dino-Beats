@@ -8,6 +8,7 @@ class Server extends JSONTemplate {
 		this.text = this.userData.text;
 		this.voice = this.userData.voice;	
 		this.queue = [];
+		this.queueNode = null;
 		this.connection = null;
 		this.dispatcher = null;
 		this.active = false;
@@ -57,6 +58,12 @@ class Server extends JSONTemplate {
 		//Clearing interval.
 		clearInterval(this.timeout);
 		this.timeout = null;
+	}
+	queueUp(node) {
+		this.queueNode = node;
+	}
+	clean() {
+		this.queueNode = null;
 	}
 	async next(client) {
 		this.queue.splice(0, 1);
