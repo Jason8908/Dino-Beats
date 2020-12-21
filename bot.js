@@ -88,7 +88,7 @@ client.on('voiceStateUpdate', (before, after) => {
 	if(!after.channelID && after.id == client.user.id) {
 		let textChan = after.guild.channels.cache.get(server.text);
 	    server.denit();
-	    channel.leave();
+	    if(channel) channel.leave();
 	};
 });
 
