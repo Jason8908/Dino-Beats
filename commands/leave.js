@@ -15,7 +15,7 @@ module.exports.run = async (client, message, args) => {
     };
     let channel = message.guild.channels.cache.get(server.voice);
     server.denit();
-    channel.leave();
+    if(channel) channel.leave();
     message.channel.send(`**${message.author.username}**. Goodbye! Thanks for listening!`);
 }
 module.exports.help = {
