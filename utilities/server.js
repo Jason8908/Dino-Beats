@@ -38,6 +38,12 @@ class Server extends JSONTemplate {
 		this.dispatcher = dispatcher;
 		this.active = true;
 	}
+	upChan(newChan) {
+		if(!newChan) return this.voice;
+		this.voice = newChan;
+		this.userData.voice = newChan;
+		this.write();
+	} 
 	denit() {
 		this.text = null;
 		this.voice = null;

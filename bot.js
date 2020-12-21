@@ -60,8 +60,6 @@ client.on('message', message => {
     //Determine sender
     let userID = message.author.id;
 	let serverID = message.guild.id;
-	//Checking for bound channel if any.
-	if(client.musicCache[serverID].text && message.channel.id != client.musicCache[serverID].text) return;
     //Making the message all lowercase.
 	//Getting the message array
 	let messageArray = message.content.split(" ");
@@ -78,6 +76,20 @@ client.on('message', message => {
     command = command.toLowerCase();
 	let cmd = commands[command.slice(client.prefix.length)];
 	if (cmd) cmd.run(client, message, args);
+});
+
+//Checking if bot would get disconnected by a user.
+client.on('voiceStateUpdate', (before, after) => {
+	let serverID = after.guild.id;
+	let server = client.musicCache[serverID];
+	let channel = after.guild.channels.cache.get(server.voice);
+	//Changing the voice channel id if it is different.
+	if(after.channelID && after.channelID != server.voice) server.upChan(after.channelID);
+	if(!after.channelID && after.id == client.user.id) {
+		let textChan = after.guild.channels.cache.get(server.text);
+	    server.denit();
+	    channel.leave();
+	};
 });
 
 client.login(data['auth.json'].data.token);

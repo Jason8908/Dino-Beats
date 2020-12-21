@@ -1,3 +1,4 @@
+//Music node.
 class queueNode {
     constructor(name, user, link, length) {
         this.title = name;
@@ -6,6 +7,7 @@ class queueNode {
         this.length = length;
     }
 }
+//Formatting time.
 function timeFormat(seconds) {
     let hrs = ~~(seconds / 3600);
     let mins = ~~((seconds % 3600) / 60);
@@ -21,6 +23,13 @@ function timeFormat(seconds) {
     out += secs;
     return out;
 };
+//Queue object.
+class Queue {
+    constructor() {
+        this.q = [];
+        this.q2d = [];
+    }
+}
 
 module.exports.queueNode = queueNode;
 module.exports.sToT = timeFormat;
