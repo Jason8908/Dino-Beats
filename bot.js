@@ -25,6 +25,8 @@ client.on('ready', () => {
 		//Writing the data into the file.
 		server.write();
 	})
+	//Setting activity.
+	client.user.setActivity('*help', { type: 'WATCHING' });
 	//Getting music cache made.
 	client.musicCache = setup.run(guilds.cache, Server);
 	//Disconnecting bot from vc.
