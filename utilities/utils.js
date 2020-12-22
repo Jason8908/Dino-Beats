@@ -49,6 +49,7 @@ class Queue {
         return message;
     }
     init(newMessage, guildID, guildName) {
+        const Discord = require('discord.js');
         this.guild = {id: guildID, name: guildName};
         this.message = newMessage;
         this.page = 1;
