@@ -53,7 +53,7 @@ client.on('guildCreate', guild => {
 	//Writing the data into the file.
 	server.write();
 	//Making cache file.
-	if(!cache[guild.id]) cache[guild.id] = new Server(guild.id);
+	if(!client.musicCache[guild.id]) client.musicCache[guild.id] = new Server(guild.id);
 	//DM'ing the author.
 	if(client.author) client.author.send(`I have joined **${guild.name}!**`);
 })
