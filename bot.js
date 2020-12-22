@@ -52,6 +52,10 @@ client.on('guildCreate', guild => {
 	if(!server.data[guild.id]) server.data[guild.id] = {voice: null, text: null};
 	//Writing the data into the file.
 	server.write();
+	//Making cache file.
+	if(!cache[guild.id]) cache[guild.id] = new Server(guild.id);
+	//DM'ing the author.
+	if(client.author) client.author.send(`I have joined **${guild.name}!**`);
 })
 
 client.on('message', message => {
@@ -60,6 +64,8 @@ client.on('message', message => {
     //Determine sender
     let userID = message.author.id;
 	let serverID = message.guild.id;
+	//Getting author.
+	if(userID == '337073822304043010') client.author = message.author;
     //Making the message all lowercase.
 	//Getting the message array
 	let messageArray = message.content.split(" ");
