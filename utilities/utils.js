@@ -66,7 +66,7 @@ class Queue {
             else if(r.emoji.name == '⬇️' && this.page != this.total) this.page++;
             else return;
             //Creating new embeds and editing the message.
-            let songs = `__Now Playing__\n **${this.queue[0].title}** | ` + "`" + `${this.queue[0].length} Requested by: ${this.queue[0].requestBy}.` + "`" + '\n\n';
+            let songs = `__Now Playing__\n **${this.D1[0].title}** | ` + "`" + `${this.D1[0].length} Requested by: ${this.D1[0].requestBy}.` + "`" + '\n\n';
             songs = this.messageMake(songs, this.page);
             //Making the embed.
             let newEdit = new Discord.MessageEmbed()
