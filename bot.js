@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const opus = require('@discordjs/opus');
 const colors = require('colors');
 const client = new Discord.Client();
-const Log = require('./utilities/log.js');
+const Log = require("./utilities/log.js");
 //JSON Template Util.
 let JSONTemplate = require("./utilities/JSONTemplate.js");
 let Server = require("./utilities/server.js");
