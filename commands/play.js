@@ -17,7 +17,7 @@ module.exports.run = async (client, message, args) => {
     var opts = {
         maxResults: 10,
         type: 'video',
-        key: 'AIzaSyBxJsI9a856fUbauCYgYeMyN6Ox3woE24M'
+        key: 'empty'
     };
     //Joining the channel if the bot isn't already in one.
     if(!client.musicCache[serverID].voice) {
