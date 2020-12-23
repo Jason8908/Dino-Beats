@@ -30,8 +30,8 @@ class Server extends JSONTemplate {
 			if(!pointer.active) {
 				connection.disconnect();
 				let channel = guild.channels.cache.get(textID);
-				channel.send('I left the channel because I was **inactive** for too long!');
 				pointer.denit();
+				channel.send('I left the channel because I was **inactive** for too long!');
 			};
 		}, 600000);
 	}
