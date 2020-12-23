@@ -3,6 +3,7 @@ const Discord = require('discord.js');
 const opus = require('@discordjs/opus');
 const colors = require('colors');
 const client = new Discord.Client();
+const Log = require('utilities/log.js')
 //JSON Template Util.
 let JSONTemplate = require("./utilities/JSONTemplate.js");
 let Server = require("./utilities/server.js");
@@ -94,10 +95,16 @@ client.on('voiceStateUpdate', (before, after) => {
 	//Changing the voice channel id if it is different.
 	if(after.channelID && after.channelID != server.voice) server.upChan(after.channelID);
 	if(!after.channelID && after.id == client.user.id) {
-		let textChan = after.guild.channels.cache.get(server.text);
 	    server.denit();
 	    if(channel) channel.leave();
 	};
+});
+
+//Errors
+client.on('error', err => {
+	let newPath = resolve('./logs');
+	let log = new Log(err, newPath);
+	return;
 });
 
 client.login(data['auth.json'].data.token);
