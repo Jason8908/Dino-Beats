@@ -106,7 +106,7 @@ module.exports.run = async (client, message, args) => {
             //Logging error.
             if(err.response) {
                 if(err.response.status == 403) if(err.response.status == 403) message.channel.send('The bot has run out of quota for the Youtube search API... I am looking for ways to expand more quota, but until then, it would be great if you could wait until tomorrow! So sorry.');
-                conncache.ection.disconnect();
+                cache.connection.disconnect();
                     let channel = guild.channels.cache.get(cache.text);
                     if(channel) channel.leave();
                     cache.denit();
