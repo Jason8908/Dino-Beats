@@ -35,6 +35,11 @@ module.exports.run = async (client, message, args) => {
                     cache.denit();
                     return console.log(err);
                 };
+                //No results.
+                if(!results) {
+                    message.channel.send(`There were no results found for the query: **${query}**`);
+                    return false;
+                };
                 //Making queue node.
                 let title = results[0].title, user = message.author.username, link = results[0].link;
                 //Getting time
@@ -104,14 +109,19 @@ module.exports.run = async (client, message, args) => {
         //Searching for the results
         search(query, opts, async (err, results) => {
             //Logging error.
-            if(err.response) {
-                if(err.response.status == 403) if(err.response.status == 403) message.channel.send('The bot has run out of quota for the Youtube search API... I am looking for ways to expand more quota, but until then, it would be great if you could wait until tomorrow! So sorry.');
+            if(err) {
+                if(err.response.status == 403) message.channel.send('The bot has run out of quota for the Youtube search API... I am looking for ways to expand more quota, but until then, it would be great if you could wait until tomorrow! So sorry.');
                 cache.connection.disconnect();
-                    let channel = guild.channels.cache.get(cache.text);
-                    if(channel) channel.leave();
-                    cache.denit();
+                let channel = guild.channels.cache.get(cache.text);
+                if(channel) channel.leave();
+                cache.denit();
                 return console.log(err);
-            }
+            };
+            //No results.
+            if(!results) {
+                message.channel.send(`There were no results found for the query: **${query}**`);
+                return false;
+            };
             //Making queue node.
             let title = results[0].title, user = message.author.username, link = results[0].link;
             //Getting time
