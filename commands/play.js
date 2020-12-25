@@ -19,8 +19,10 @@ module.exports.run = async (client, message, args) => {
         type: 'video',
         key: 'empty'
     };
+    // Get the client's voiceConnection
+    let clientVoiceConnection = message.guild.voiceConnection;
     //Joining the channel if the bot isn't already in one.
-    if(!client.musicCache[serverID].voice) {
+    if(!clientVoiceConnection.channel) {
         commands['join'].run(client, message, args, async function(res) {
             if(res < 1) return false;
             message.channel.send(`Searching **Youtube** <:youtube:766415814223593522> for **${args.join(' ')}**!`);
