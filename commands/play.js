@@ -20,7 +20,7 @@ module.exports.run = async (client, message, args) => {
         key: 'empty'
     };
     // Get the client's voiceConnection
-    let clientVoiceConnection = message.guild.voiceConnection;
+    let clientVoiceConnection = message.guild.voice;
     //Joining the channel if the bot isn't already in one.
     if(!clientVoiceConnection) {
         commands['join'].run(client, message, args, async function(res) {
