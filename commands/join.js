@@ -13,7 +13,7 @@ module.exports.run = async (client, message, args, callback = null) => {
     // Get the client's voiceConnection
     // Checking if bot already in channel
     let clientVoiceConnection = message.guild.voiceConnection;
-    if(!clientVoiceConnection) {
+    if(clientVoiceConnection) {
         message.channel.send(`**${message.author.username}**, I'm already in a channel!`);
         end = -1;
         if(callback) callback(end);
