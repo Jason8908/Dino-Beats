@@ -102,7 +102,7 @@ class Server extends JSONTemplate {
 	        let channel = guild.channels.cache.get(this.text);
 	        if(this.loop && this.loopMessage) {
 	        	this.loopX++;
-	        	let embed = new Discord.MessageEmbed()
+	        	let embed = new this.Discord.MessageEmbed()
 	        		.setAuthor(`Now Playing (x${this.loopX})`)
 	        		.setTitle(this.queue[0].title)
 	        		.setURL(this.queue[0].link);
