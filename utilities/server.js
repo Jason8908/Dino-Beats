@@ -45,6 +45,7 @@ class Server extends JSONTemplate {
 	}
 	skip() {
 		this.skipped = true;
+		this.loopMessage = null;
 		this.dispatcher.emit('finish');
 	}
 	upChan(newChan) {
