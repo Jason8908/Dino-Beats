@@ -28,7 +28,7 @@ module.exports.run = async (client, message, args) => {
 };
 
 module.exports.help = {
-    name: ['remove'],
+    name: ['remove', 'rem'],
     description: "Remove a song from the queue. \`*remove [queue position]\`",
     page: 1,
     title: "Music Commands"

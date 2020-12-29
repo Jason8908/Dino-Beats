@@ -66,7 +66,7 @@ class Server extends JSONTemplate {
 		this.queueNode = null;
 	}
 	async next(client) {
-		this.queue.splice(0, 1);
+		if(!this.loop) this.queue.splice(0, 1);
 		if(this.queue.length > 0) {
 			this.active = true;
 			let link = this.queue[0].link;
