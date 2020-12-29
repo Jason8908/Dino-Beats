@@ -15,6 +15,10 @@ class Server extends JSONTemplate {
 		this.timeout = null;
 		this.ytdl = require('ytdl-core');
 		this.prism = require('prism-media');
+		this.Discord = require('discord.js');
+		this.loopX = 1;
+		this.loopMessage = null;
+		this.skipped = false;
 	}
 	init(textID = this.text, voiceID = this.voice, connection = this.connection, guild) {
 		this.text = textID;
@@ -38,6 +42,10 @@ class Server extends JSONTemplate {
 	play(dispatcher) {
 		this.dispatcher = dispatcher;
 		this.active = true;
+	}
+	skip() {
+		this.skipped = true;
+		this.dispatcher.emit('finish');
 	}
 	upChan(newChan) {
 		if(!newChan) return this.voice;
@@ -66,7 +74,12 @@ class Server extends JSONTemplate {
 		this.queueNode = null;
 	}
 	async next(client) {
-		if(!this.loop) this.queue.splice(0, 1);
+		//Allowing the splice if the user skipped or if it's not looping.
+		if(!this.loop || this.skipped) {
+			this.queue.splice(0, 1);
+			this.skipped = false;
+		};
+		//If there are still songs in the queue.
 		if(this.queue.length > 0) {
 			this.active = true;
 			let link = this.queue[0].link;
@@ -87,14 +100,25 @@ class Server extends JSONTemplate {
 	        //Sending message.
 	        let guild = client.guilds.cache.get(this.serverID);
 	        let channel = guild.channels.cache.get(this.text);
-            //Sending message.
-            channel.send({embed: {
-                author: {
-                  name: 'Now Playing'
-                },
-                title: this.queue[0].title,
-                url: this.queue[0].link,
-            }});
+	        if(this.loop && this.loopMessage) {
+	        	this.loopX++;
+	        	let embed = new Discord.MessageEmbed()
+	        		.setAuthor(`Now Playing (x${this.loopX})`)
+	        		.setTitle(this.queue[0].title)
+	        		.setURL(this.queue[0].link);
+	        	this.loopMessage.edit(embed);
+	        }
+	        else {
+	        	this.loopX = 1;
+	            //Sending message.
+	            this.loopMessage = await channel.send({embed: {
+	                author: {
+	                  name: 'Now Playing'
+	                },
+	                title: this.queue[0].title,
+	                url: this.queue[0].link,
+	            }});
+	        };
 	    };
 	}
 	async remove(pos) {

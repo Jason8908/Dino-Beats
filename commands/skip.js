@@ -11,8 +11,10 @@ module.exports.run = async (client, message, args) => {
         }});
         return;
     };
+    //Getting object.
+    let cache = client.musicCache[serverID];
     //Trying to remove the song.
-    client.musicCache[serverID].dispatcher.emit('finish');
+    cache.skip();
     //Sending the message.
     message.channel.send({embed: {
         description: `**The song was successfully skipped!**`
