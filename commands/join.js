@@ -10,6 +10,16 @@ module.exports.run = async (client, message, args, callback = null) => {
         if(callback) callback(end);
         return end;
     };
+    // Get the client's voiceConnection
+    let clientVoiceConnection = message.guild.voice;
+    if(clientVoiceConnection) {
+            if(clientVoiceConnection.channelID) {
+                message.channel.send(`**${message.author.username}**, I'm already in a channel!`);
+                end = -1;
+                if(callback) callback(end);
+                return end;
+            };
+    };
     //Channel IDs
     let textID = message.channel.id;
     let voiceID = message.member.voice.channel.id;

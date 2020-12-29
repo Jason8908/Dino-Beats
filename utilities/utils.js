@@ -42,7 +42,7 @@ class Queue {
         if(this.D1.length > 1) {
             for(let i = 0; i < this.queue[page].length; i++) {
                 let pos = this.D1.indexOf(this.queue[page][i]);
-                pos++;
+                pos;
                 message += `\`\`${[pos]}.\`\` **${this.queue[page][i].title}** | ` + "`" + `${this.queue[page][i].length} Requested by: ${this.queue[page][i].requestBy}.` + "`" + '\n\n';
             };
         }

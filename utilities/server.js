@@ -28,7 +28,7 @@ class Server extends JSONTemplate {
 		let pointer = this;
 		this.timeout = setInterval(function() {
 			if(!pointer.active) {
-				connection.disconnect();
+				pointer.connection.disconnect();
 				let channel = guild.channels.cache.get(textID);
 				pointer.denit();
 				channel.send('I left the channel because I was **inactive** for too long!');
